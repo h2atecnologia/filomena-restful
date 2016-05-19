@@ -16,7 +16,7 @@ require __DIR__.'/lib/Controller/Scaffolding.php';
 require __DIR__.'/lib/Controller/BaseController.php';
 
 /*if (!defined('FILOMENARESTFUL_AUTOLOAD_DISABLE'))
-	spl_autoload_register('restful_autoload',false,FILOMENARESTFUL_AUTOLOAD_PREPEND);
+	spl_autoload_register('restful_autoload',false, FILOMENARESTFUL_AUTOLOAD_PREPEND);
 
 function restful_autoload($class_name)
 {
