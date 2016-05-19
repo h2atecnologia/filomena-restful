@@ -18,7 +18,8 @@ class BaseController extends Scaffolding
 
 	final protected function get_called_class()
 	{
-		return array_pop(explode("\\", get_class($this)));
+		$dummy = explode("\\", get_class($this));
+		return array_pop($dummy);
 	}
 	
 	public function get_cookie()
