@@ -11,20 +11,11 @@ class Bootstrap
 	
 	public function __construct( $root = null, RouteTable $route_table = null, $controller_dir = null )
 	{
-		if(!defined("__APP_RUNNING_MODE__"))
-			define("__APP_RUNNING_MODE__", 1);
-
 		if($root == null || gettype($root) != "string")
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("Root value is a mandatory parameter.");
-			else
-				die("Error# Root value is a mandatory parameter.");
+			throw new RESTfulBootstrapException("Root value is a mandatory parameter.");
 
 		if($route_table == null || gettype($route_table) != "object")
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("RouteTable instance is a mandatory parameter.");
-			else
-				die("Error# RouteTable instance is a mandatory parameter.");
+			throw new RESTfulBootstrapException("RouteTable instance is a mandatory parameter.");
 
 		$this->root_path = $root;
 		
@@ -59,10 +50,7 @@ class Bootstrap
 			{
 				// Origin is not allowed ?
 				if (!in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins))
-					if(__APP_RUNNING_MODE__ == 1)
-						throw new RESTfulBootstrapException("Origin: " . $_SERVER['HTTP_ORIGIN'] . " unauthorized.");
-					else
-						die("Error# Origin: " . $_SERVER['HTTP_ORIGIN'] . " unauthorized.");
+					throw new RESTfulBootstrapException("Origin: " . $_SERVER['HTTP_ORIGIN'] . " unauthorized.");
 			}
 
 			$origin = count($allowed_origins) ==0 && !$send_credentials ? "*" : $_SERVER['HTTP_ORIGIN'];
@@ -116,22 +104,13 @@ class Bootstrap
 		$_route = $this->route_table->match_route($_qs);
 		
 		if($_route == null)	// nenhum route foi encontrado
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("RouteTable cannot discover a route.");
-			else
-				die("Error# RouteTable cannot discover a route.");
+			throw new RESTfulBootstrapException("RouteTable cannot discover a route.");
 
 		if($_route["ajax_only"] && !\HTTP\Request::is_ajax())
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("Only ajax is allowed for this call.");
-			else
-				die("Error# Only ajax is allowed for this call.");
+			throw new RESTfulBootstrapException("Only ajax is allowed for this call.");
 			
 		if(!$this->validate_method( $_route["method"]))
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("Method: " . strtolower($_SERVER['REQUEST_METHOD']) . " not allowed in rule: " .  $_route["method"] . ".");
-			else
-				die("Error# Method: " . strtolower($_SERVER['REQUEST_METHOD']) . " not allowed in rule: " .  $_route["method"] . ".");
+			throw new RESTfulBootstrapException("Method: " . strtolower($_SERVER['REQUEST_METHOD']) . " not allowed in rule: " .  $_route["method"] . ".");
 		
 		//------  route values
 		$_values = $this->route_table->strip_values( $_route["values"] );
@@ -152,10 +131,7 @@ class Bootstrap
 
 		if(!file_exists($this->controller_directory . strtolower($_route["values"]["controller"]) . ".php"))
 		{
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("Controller file: " . strtolower($_route["values"]["controller"]) . " not found.");
-			else
-				die("Error# Controller file: " . strtolower($_route["values"]["controller"]) . " not found.");
+			throw new RESTfulBootstrapException("Controller file: " . strtolower($_route["values"]["controller"]) . " not found.");
 		} else {
 			require_once( $this->controller_directory . strtolower($_route["values"]["controller"]) . ".php" );
 		}
@@ -165,10 +141,7 @@ class Bootstrap
 		$_action = $_route["method"] == "default" ? ucfirst($_SERVER['REQUEST_METHOD']) : $_route["action"];
 		
 		if(!class_exists($_controller))
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("Controller instance: " . $_route["values"]["controller"] . " not found.");
-			else
-				die("Error# Controller instance: " . $_route["values"]["controller"] . " not found.");
+			throw new RESTfulBootstrapException("Controller instance: " . $_route["values"]["controller"] . " not found.");
 		
 		$_instance = new $_controller( $this->default_cookie_name );
 
@@ -176,10 +149,7 @@ class Bootstrap
 		{
 			call_user_func_array(array($_instance, $_action), $_values);
 		} else {
-			if(__APP_RUNNING_MODE__ == 1)
-				throw new RESTfulBootstrapException("Action method: " . $_action . " not found.");
-			else
-				die("Error# Action method: " . $_action . " not found.");
+			throw new RESTfulBootstrapException("Action method: " . $_action . " not found.");
 		}
 
 	}

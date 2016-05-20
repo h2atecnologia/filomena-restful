@@ -8,9 +8,6 @@ class BaseController extends Scaffolding
 	
 	public function __construct( $cookie_name )
 	{
-		if(!defined("__APP_RUNNING_MODE__"))
-			define("__APP_RUNNING_MODE__", 1);
-
 		$this->default_cookie_name = $cookie_name;
 		
 		$this->class_name = "\\" . $this->get_called_class();
@@ -84,12 +81,8 @@ class BaseController extends Scaffolding
 		// TODO encode XML 
 		// TODO encode XML 
 		// TODO encode XML 
-		if(__APP_RUNNING_MODE__ == 1)
-			throw new Exception("Render XML not implemented.");
-		else
-			die("Error# Render XML not implemented.");
 
-		exit();
+		throw new Exception("Render XML not implemented.");
 	}
 
 	public function render_as_text($response)
