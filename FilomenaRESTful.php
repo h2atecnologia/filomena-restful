@@ -1,13 +1,14 @@
 <?php
-if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 70000)
-	die('FilomenaRESTful requires PHP 7.0 or higher');
+//if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 70000)
+//	die('FilomenaRESTful requires PHP 7.0 or higher');
+if (!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50534)
+	die('FilomenaRESTful requires PHP 5.5.34 or higher');
 
 define('FILOMENARESTFUL_VERSION_ID','1.0');
 
 if (!defined('FILOMENARESTFUL_AUTOLOAD_PREPEND'))
 	define('FILOMENARESTFUL_AUTOLOAD_PREPEND',true);
 
-require __DIR__.'/lib/HTTP.php';
 require __DIR__.'/lib/Exceptions.php';
 require __DIR__.'/lib/RouteTable.php';
 require __DIR__.'/lib/Bootstrap.php';
