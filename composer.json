@@ -1,25 +1,24 @@
 {
-    "name": "h2atecnologia/filomena-restful",
-    "type": "library",
-    "description": "FilomenaRESTful - is an open source RESTful based framework",
-    "keywords": ["RESTful", "WebAPI", "JSON", "API", "Filomena"],
-    "homepage": "http://www.h2a.com.br/filomena/",
-    "license": "MIT",
-    "authors": [
-    	{
-    		"name": "Luiz Henrique Dias de Souza",
-    		"email": "henrique@h2a.com.br",
-    		"role": "Developer"
-    	}
-    ],
-    "require": {
-        "php": ">=5.5.34",
-		"h2atecnologia/web-helpers": "dev-master"
-    },
-    "require-dev": {
+	"name": "h2atecnologia/filomena-restful",
+	"type": "library",
+	"description": "FilomenaRESTful - is an open source RESTful based framework",
+	"keywords": ["RESTful", "WebAPI", "JSON", "API", "Filomena"],
+	"homepage": "http://www.h2a.com.br/filomena/",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Luiz Henrique Dias de Souza",
+			"email": "henrique@h2a.com.br",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.5.34"
+	},
+	"require-dev": {
 
-    },
-    "autoload": {
-        "files": [ "FilomenaRESTful.php" ]
-    }
+	},
+	"autoload": {
+		"files": [ "FilomenaRESTful.php" ]
+	}
 }
