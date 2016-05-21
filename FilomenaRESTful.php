@@ -23,6 +23,8 @@ if (!defined('FILOMENARESTFUL_AUTOLOAD_DISABLE'))
 
 function restful_autoload($class_name)
 {
+	//trigger_error("Class auto loaded: $class_name", E_USER_NOTICE);
+
 	$path = RESTful\Config::instance()->get_plugin_path();
 	$root = realpath(isset($path) ? $path : '.');
 
